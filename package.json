@@ -1,11 +1,14 @@
 {
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "models": "node models/models.js"
+    "start": "nodemon index.js"
   },
+
+  "proxy": "http://localhost:3000",
+  
   "dependencies": {
     "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "sequelize": "^6.32.1",
     "sqlite3": "^5.1.6"
   }

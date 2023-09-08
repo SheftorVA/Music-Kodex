@@ -1,51 +1,27 @@
-const modules = require('../exports');
-
-const path = modules.path;
-const express = modules.express;
-const Sequelize = modules.Sequelize;
-const Datatypes = modules.DataTypes;
-const Op = modules.Op;
+const path = require('path');
+const { Sequelize, DataTypes, Op } = require('sequelize');
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: path.join(__dirname, 'music.sqlite'),
 });
 
-async function testConnection() {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-}
-
 const Artist = sequelize.define('Artist', {
   name: {
-    type: Datatypes.TEXT,
+    type: DataTypes.STRING,
     defaultValue: 'Unknown',
-  },
-  id: {
-    type: Datatypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
+    unique: true,
   },
 });
 
 const Song = sequelize.define('Song', {
-  id: {
-    type: Datatypes.TEXT,
-    autoIncrement: true,
-    primaryKey: true,
-  },
   name: {
-    type: Datatypes.TEXT,
+    type: DataTypes.STRING,
     defaultValue: 'Unknown',
   },
-  artist_id: {
-    type: Datatypes.INTEGER,
-  },
-  artist: {
-    type: Datatypes.TEXT,
-  },
 });
+
+Song.belongsToMany(Artist, { through: 'SongsArtists' });
+Artist.belongsToMany(Song, { through: 'SongsArtists' });
+
+module.exports = { Song, Artist, sequelize };

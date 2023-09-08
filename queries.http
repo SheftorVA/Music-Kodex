@@ -1,0 +1,52 @@
+POST http://localhost:3000/Artists HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Noize_MC"
+}
+
+###
+
+PUT http://localhost:3000/Artists/2 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "D"
+}
+
+###
+
+DELETE http://localhost:3000/Artists/3 HTTP/1.1
+
+###
+
+GET http://localhost:3000/Artists/ HTTP/1.1
+Content-Type: application/json
+
+###
+
+GET http://localhost:3000/songs/ HTTP/1.1
+Content-Type: application/json
+
+###
+
+POST http://localhost:3000/songs/ HTTP/1.1
+content-type: application/json
+
+{
+    "song": "Устрой дестрой",
+    "artist": "Noize_MC"
+}
+
+###
+
+PUT http://localhost:3000/songs/1 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "На Марсе классно"
+}
+###
+
+DELETE http://localhost:3000/songs/2 HTTP/1.1
+
